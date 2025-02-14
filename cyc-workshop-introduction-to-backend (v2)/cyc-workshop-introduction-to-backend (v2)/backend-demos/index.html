@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend-Only Login Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .hidden { display: none; }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Frontend-Only Login Demo</h1>
+
+    <div id="login-form">
+        <input type="text" id="username" placeholder="Enter Username">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="dashboard" class="hidden">
+        <h2>Welcome, <span id="user-display"></span>!</h2>
+        <p>Your role: <span id="user-role">guest</span></p>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            if (!username) {
+                alert("Please enter a username!");
+                return;
+            }
+
+            // Save user login info in localStorage (Insecure!)
+            localStorage.setItem("username", username);
+            localStorage.setItem("role", "user"); // Default role (easily changeable in console!)
+
+            displayDashboard();
+        }
+
+        function logout() {
+            localStorage.removeItem("username");
+            localStorage.removeItem("role");
+            displayLogin();
+        }
+
+        function displayDashboard() {
+            const username = localStorage.getItem("username");
+            const role = localStorage.getItem("role");
+
+            if (username) {
+                document.getElementById("user-display").innerText = username;
+                document.getElementById("user-role").innerText = role;
+                document.getElementById("login-form").classList.add("hidden");
+                document.getElementById("dashboard").classList.remove("hidden");
+            } else {
+                displayLogin();
+            }
+        }
+
+        function displayLogin() {
+            document.getElementById("login-form").classList.remove("hidden");
+            document.getElementById("dashboard").classList.add("hidden");
+        }
+
+        // On page load, check if user is already logged in
+        displayDashboard();
+    </script>
+
+</body>
+</html>

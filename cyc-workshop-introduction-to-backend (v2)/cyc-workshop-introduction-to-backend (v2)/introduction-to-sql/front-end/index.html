@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Order Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Food Order Menu</h1>
+
+        <!-- Authentication Section -->
+        <div id="auth-section">
+            <h2>User Authentication</h2>
+            <div id="toggle-buttons">
+                <button id="show-login">Login</button>
+                <button id="show-signup">Sign Up</button>
+            </div>
+        
+            <form id="signup-form" class="hidden">
+                <h2>Sign Up</h2>
+                <input type="email" id="signup-email" placeholder="Email" required>
+                <input type="password" id="signup-password" placeholder="Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+        
+            <form id="login-form">
+                <h2>Login</h2>
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <!-- User Info -->
+        <div id="user-info" style="display: none;">
+            <p>Logged in as: <span id="user-email"></span></p>
+            <button id="logout-btn">Logout</button>
+        </div>
+
+        <!-- Menu Section (Visible only when logged in) -->
+        <div id="main-content" style="display: none;">
+            <h2>Menu Items</h2>
+            <div id="menu-list"></div>
+
+            <h2>Add New Food Item</h2>
+            <form id="food-form">
+                <input type="text" id="food-name" placeholder="Food Name" required>
+                <input type="text" id="food-description" placeholder="Description">
+                <input type="number" id="food-price" placeholder="Price" required>
+                <button type="submit">Add Food</button>
+            </form>
+
+            <h2>Place an Order</h2>
+            <form id="order-form">
+                <label for="menu-items">Select Menu Items:</label>
+                <br/>
+                <select id="menu-items" required>
+                    <option value="" disabled selected>Select a menu item</option>
+                    <!-- Options will be populated dynamically from JavaScript -->
+                </select>
+                <input type="number" id="item-quantity" placeholder="Quantity" min="1" required>
+                <button type="submit">Place Order</button>
+            </form>
+
+            <h2>Your Order History</h2>
+            <div id="order-history"></div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
